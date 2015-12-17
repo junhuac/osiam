@@ -71,7 +71,10 @@ public class LdapAuthentication {
 
     @Bean
     public BaseLdapPathContextSource contextSource() {
-        return new DefaultSpringSecurityContextSource(url);
+    	DefaultSpringSecurityContextSource ctxsrc = new DefaultSpringSecurityContextSource(url);
+    	ctxsrc.setUserDn("cn=manager,cn=users,dc=work,dc=local");
+    	ctxsrc.setPassword("secret");
+    	return ctxsrc;
     }
 
     @Bean
