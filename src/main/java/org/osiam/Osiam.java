@@ -6,6 +6,9 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationVersion;
+import com.contrastsecurity.cassandra.migration.CassandraMigration;
+import com.contrastsecurity.cassandra.migration.config.Keyspace;
+
 import org.osiam.security.helper.SSLRequestLoggingFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -58,6 +61,7 @@ public class Osiam extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(Osiam.class);
         application.setDefaultProperties(DEFAULT_PROPERTIES);
+        
         application.run(args);
     }
 
@@ -92,7 +96,8 @@ public class Osiam extends SpringBootServletInitializer {
         return new HikariDataSource(hikariConfig);
     }
 
-    @Bean(initMethod = "migrate")
+/*    
+    @Bean
     public Flyway flyway() {
         Flyway flyway = new Flyway();
         flyway.setDataSource(dataSource());
@@ -101,7 +106,26 @@ public class Osiam extends SpringBootServletInitializer {
         flyway.setBaselineVersion(MigrationVersion.fromVersion("2"));
         return flyway;
     }
+*/
+    
+    @Bean(initMethod = "migrate")
+    public CassandraMigration cassandra() {
+    	String[] scriptsLocations = {"db/migration/cassandra"};
 
+    	Keyspace keyspace = new Keyspace();
+    	keyspace.setName("osiam");
+    	keyspace.getCluster().setContactpoints("localhost");
+    	keyspace.getCluster().setPort(9160);
+    	keyspace.getCluster().setUsername("");
+    	keyspace.getCluster().setPassword("");
+
+    	CassandraMigration cm = new CassandraMigration();
+    	cm.getConfigs().setScriptsLocations(scriptsLocations);
+    	cm.setKeyspace(keyspace);
+    	
+        return cm;
+    }
+    
     @Bean
     public ShaPasswordEncoder passwordEncoder() {
         ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder(512);

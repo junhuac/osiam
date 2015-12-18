@@ -248,6 +248,16 @@
             <version>1.7.5</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+        	<groupId>org.apache-extras.cassandra-jdbc</groupId>
+        	<artifactId>cassandra-jdbc</artifactId>
+        	<version>1.2.5</version>
+        </dependency>
+        <dependency>
+        	<groupId>com.contrastsecurity</groupId>
+        	<artifactId>cassandra-migration</artifactId>
+        	<version>0.6</version>
+        </dependency>
     </dependencies>
 
     <repositories>
