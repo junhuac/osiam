@@ -3,109 +3,109 @@
 -- Name: scim_address; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_address (
-  multi_value_id   BIGINT NOT NULL AUTO_INCREMENT,
+  multi_value_id   UUID,
   is_primary       BOOLEAN,
-  country          CHARACTER VARYING(255),
-  formatted        LONGTEXT,
-  locality         CHARACTER VARYING(255),
-  postalcode       CHARACTER VARYING(255),
-  region           CHARACTER VARYING(255),
-  streetaddress    CHARACTER VARYING(255),
-  type             CHARACTER VARYING(255),
+  country          TEXT,
+  formatted        TEXT,
+  locality         TEXT,
+  postalcode       TEXT,
+  region           TEXT,
+  streetaddress    TEXT,
+  type             TEXT,
   user_internal_id BIGINT NOT NULL,
   PRIMARY KEY (multi_value_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 175 (class 1259 OID 108938)
 -- Name: scim_certificate; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_certificate (
-  multi_value_id   BIGINT NOT NULL AUTO_INCREMENT,
+  multi_value_id   UUID,
   is_primary       BOOLEAN,
-  value            LONGTEXT,
-  type             CHARACTER VARYING(255),
+  value            TEXT,
+  type             TEXT,
   user_internal_id BIGINT NOT NULL,
   PRIMARY KEY (multi_value_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 176 (class 1259 OID 108946)
 -- Name: scim_email; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_email (
-  multi_value_id   BIGINT NOT NULL AUTO_INCREMENT,
+  multi_value_id   UUID,
   is_primary       BOOLEAN,
-  value            LONGTEXT,
-  type             CHARACTER VARYING(255),
+  value            TEXT,
+  type             TEXT,
   user_internal_id BIGINT NOT NULL,
   PRIMARY KEY (multi_value_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 177 (class 1259 OID 108954)
 -- Name: scim_entitlements; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_entitlements (
-  multi_value_id   BIGINT NOT NULL AUTO_INCREMENT,
+  multi_value_id   UUID,
   is_primary       BOOLEAN,
-  value            LONGTEXT,
-  type             CHARACTER VARYING(255),
+  value            TEXT,
+  type             TEXT,
   user_internal_id BIGINT NOT NULL,
   PRIMARY KEY (multi_value_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 178 (class 1259 OID 108962)
 -- Name: scim_extension; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_extension (
-  internal_id BIGINT   NOT NULL AUTO_INCREMENT,
-  urn         LONGTEXT NOT NULL,
+  internal_id UUID,
+  urn         TEXT NOT NULL,
   PRIMARY KEY (internal_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 179 (class 1259 OID 108970)
 -- Name: scim_extension_field; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_extension_field (
-  internal_id           BIGINT                 NOT NULL AUTO_INCREMENT,
-  name                  CHARACTER VARYING(255),
+  internal_id           UUID,
+  name                  TEXT,
   is_required           BOOLEAN,
-  type                  CHARACTER VARYING(255) NOT NULL,
+  type                  TEXT NOT NULL,
   extension_internal_id BIGINT,
   PRIMARY KEY (internal_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 180 (class 1259 OID 108978)
 -- Name: scim_extension_field_value; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_extension_field_value (
-  internal_id                 BIGINT   NOT NULL AUTO_INCREMENT,
-  value                       LONGTEXT NOT NULL,
+  internal_id                 UUID,
+  value                       TEXT NOT NULL,
   extension_field_internal_id BIGINT   NOT NULL,
   user_internal_id            BIGINT   NOT NULL,
   PRIMARY KEY (internal_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 181 (class 1259 OID 108986)
 -- Name: scim_group; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_group (
-  displayname CHARACTER VARYING(255) NOT NULL,
+  displayname TEXT NOT NULL,
   internal_id BIGINT                 NOT NULL
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 182 (class 1259 OID 108991)
@@ -115,107 +115,107 @@ CREATE TABLE scim_group_scim_id (
   groups_internal_id  BIGINT NOT NULL,
   members_internal_id BIGINT NOT NULL
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 183 (class 1259 OID 108996)
 -- Name: scim_id; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_id (
-  internal_id BIGINT                 NOT NULL AUTO_INCREMENT,
-  external_id CHARACTER VARYING(255),
-  id          CHARACTER VARYING(255) NOT NULL,
+  internal_id UUID,
+  external_id TEXT,
+  id          TEXT NOT NULL,
   meta_id     BIGINT,
   PRIMARY KEY (internal_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 184 (class 1259 OID 109004)
 -- Name: scim_im; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_im (
-  multi_value_id   BIGINT NOT NULL AUTO_INCREMENT,
+  multi_value_id   UUID,
   is_primary       BOOLEAN,
-  value            LONGTEXT,
-  type             CHARACTER VARYING(255),
+  value            TEXT,
+  type             TEXT,
   user_internal_id BIGINT NOT NULL,
   PRIMARY KEY (multi_value_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 185 (class 1259 OID 109012)
 -- Name: scim_meta; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_meta (
-  id           BIGINT    NOT NULL AUTO_INCREMENT,
+  id           UUID,
   created      TIMESTAMP NULL,
   lastmodified TIMESTAMP NULL,
-  location     LONGTEXT,
-  resourcetype CHARACTER VARYING(255),
-  version      CHARACTER VARYING(255),
+  location     TEXT,
+  resourcetype TEXT,
+  version      TEXT,
   PRIMARY KEY (id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 186 (class 1259 OID 109020)
 -- Name: scim_name; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_name (
-  id              BIGINT NOT NULL AUTO_INCREMENT,
-  familyname      CHARACTER VARYING(255),
-  formatted       LONGTEXT,
-  givenname       CHARACTER VARYING(255),
-  honorificprefix CHARACTER VARYING(255),
-  honorificsuffix CHARACTER VARYING(255),
-  middlename      CHARACTER VARYING(255),
+  id              UUID,
+  familyname      TEXT,
+  formatted       TEXT,
+  givenname       TEXT,
+  honorificprefix TEXT,
+  honorificsuffix TEXT,
+  middlename      TEXT,
   PRIMARY KEY (id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 187 (class 1259 OID 109028)
 -- Name: scim_phonenumber; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_phonenumber (
-  multi_value_id   BIGINT NOT NULL AUTO_INCREMENT,
+  multi_value_id   UUID,
   is_primary       BOOLEAN,
-  value            LONGTEXT,
-  type             CHARACTER VARYING(255),
+  value            TEXT,
+  type             TEXT,
   user_internal_id BIGINT NOT NULL,
   PRIMARY KEY (multi_value_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 188 (class 1259 OID 109036)
 -- Name: scim_photo; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_photo (
-  multi_value_id   BIGINT NOT NULL AUTO_INCREMENT,
+  multi_value_id   UUID,
   is_primary       BOOLEAN,
-  value            LONGTEXT,
-  type             CHARACTER VARYING(255),
+  value            TEXT,
+  type             TEXT,
   user_internal_id BIGINT NOT NULL,
   PRIMARY KEY (multi_value_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 189 (class 1259 OID 109044)
 -- Name: scim_roles; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE scim_roles (
-  multi_value_id   BIGINT NOT NULL AUTO_INCREMENT,
+  multi_value_id   UUID,
   is_primary       BOOLEAN,
-  value            LONGTEXT,
-  type             CHARACTER VARYING(255),
+  value            TEXT,
+  type             TEXT,
   user_internal_id BIGINT NOT NULL,
   PRIMARY KEY (multi_value_id)
 )
-  ENGINE = InnoDB;
+  
 
 --
 -- TOC entry 190 (class 1259 OID 109052)
@@ -224,20 +224,20 @@ CREATE TABLE scim_roles (
 CREATE TABLE scim_user
 (
   active            BOOLEAN,
-  displayname       CHARACTER VARYING(255),
-  locale            CHARACTER VARYING(255),
-  nickname          CHARACTER VARYING(255),
-  password          CHARACTER VARYING(255) NOT NULL,
-  preferredlanguage CHARACTER VARYING(255),
-  profileurl        LONGTEXT,
-  timezone          CHARACTER VARYING(255),
-  title             CHARACTER VARYING(255),
-  username          CHARACTER VARYING(255) NOT NULL,
-  usertype          CHARACTER VARYING(255),
+  displayname       TEXT,
+  locale            TEXT,
+  nickname          TEXT,
+  password          TEXT NOT NULL,
+  preferredlanguage TEXT,
+  profileurl        TEXT,
+  timezone          TEXT,
+  title             TEXT,
+  username          TEXT NOT NULL,
+  usertype          TEXT,
   internal_id       BIGINT                 NOT NULL,
   name_id           BIGINT
 )
-  ENGINE = InnoDB;
+  
 --
 -- TOC entry 2234 (class 2606 OID 108990)
 -- Name: scim_group_pkey; Type: CONSTRAINT; Schema: public; Owner: -
@@ -599,13 +599,13 @@ VALUES (TRUE, NULL, NULL, NULL,
 -- Name: osiam_client; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE osiam_client (
-    internal_id bigint NOT NULL AUTO_INCREMENT,
+    internal_id UUID,
     accesstokenvalidityseconds integer NOT NULL,
-    client_secret character varying(255) NOT NULL,
+    client_secret text NOT NULL,
     expiry datetime NULL,
-    id character varying(32) NOT NULL,
+    id character text NOT NULL,
     implicit_approval boolean NOT NULL,
-    redirect_uri longtext NOT NULL,
+    redirect_uri TEXT NOT NULL,
     refreshtokenvalidityseconds integer NOT NULL,
     validityinseconds bigint NOT NULL,
     primary key (internal_id)
@@ -618,7 +618,7 @@ ALTER TABLE osiam_client AUTO_INCREMENT = 100;
 -- Name: osiam_client_grants; Type: TABLE; Schema: public; Owner: -
 CREATE TABLE osiam_client_grants (
     id bigint NOT NULL,
-    grants character varying(255)
+    grants TEXT
 ) ENGINE=InnoDB;
 
 --
@@ -628,7 +628,7 @@ CREATE TABLE osiam_client_grants (
 --
 CREATE TABLE osiam_client_scopes (
     id bigint NOT NULL,
-    scope character varying(255)
+    scope TEXT
 ) ENGINE=InnoDB;
 
 -- TOC entry 1908 (class 2606 OID 34788)
