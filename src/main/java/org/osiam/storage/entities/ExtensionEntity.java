@@ -48,7 +48,6 @@ public class ExtensionEntity {
     private long internalId;
 
     @Lob
-    @Type(type = "org.hibernate.type.StringClobType")
     @Column(nullable = false)
     private String urn;
 

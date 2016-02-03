@@ -60,7 +60,6 @@ public class MetaEntity {
     private Date lastModified;
 
     @Lob
-    @Type(type = "org.hibernate.type.StringClobType")
     private String location;
 
     private String version;

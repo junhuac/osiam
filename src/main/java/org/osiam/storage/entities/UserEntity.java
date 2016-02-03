@@ -51,7 +51,6 @@ public class UserEntity extends ResourceEntity {
     private String nickName;
 
     @Lob
-    @Type(type = "org.hibernate.type.StringClobType")
     private String profileUrl;
 
     private String title;

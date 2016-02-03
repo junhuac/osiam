@@ -56,7 +56,6 @@ public class AddressEntity extends BaseMultiValuedAttributeEntity {
     private Address.Type type; // @Basic is needed for JPA meta model generator
 
     @Lob
-    @Type(type = "org.hibernate.type.StringClobType")
     private String formatted;
 
     private String streetAddress;

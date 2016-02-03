@@ -58,10 +58,10 @@ public class ExtensionFieldValueEntity {
     private long internalId;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "extension_field")
     private ExtensionFieldEntity extensionField;
 
     @Lob
-    @Type(type = "org.hibernate.type.StringClobType")
     @Column(nullable = false)
     private String value;
 

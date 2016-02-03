@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="osiam" transaction-type="JTA">
+        <!-- Use Hibernate OGM provider: configuration will be transparent -->
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        
+        <class>org.osiam.auth.oauth_client.ClientEntity</class>
+        <class>org.osiam.storage.entities.AddressEntity</class>
+        <class>org.osiam.storage.entities.EmailEntity</class>
+        <class>org.osiam.storage.entities.EntitlementEntity</class>
+        <class>org.osiam.storage.entities.ExtensionEntity</class>
+        <class>org.osiam.storage.entities.ExtensionFieldEntity</class>
+        <class>org.osiam.storage.entities.ExtensionFieldValueEntity</class>
+        <class>org.osiam.storage.entities.GroupEntity</class>
+        <class>org.osiam.storage.entities.ImEntity</class>
+        <class>org.osiam.storage.entities.MetaEntity</class>
+        <class>org.osiam.storage.entities.NameEntity</class>
+        <class>org.osiam.storage.entities.PhoneNumberEntity</class>
+        <class>org.osiam.storage.entities.PhotoEntity</class>
+        <class>org.osiam.storage.entities.ResourceEntity</class>
+        <class>org.osiam.storage.entities.RoleEntity</class>
+        <class>org.osiam.storage.entities.UserEntity</class>
+        <class>org.osiam.storage.entities.X509CertificateEntity</class>
+            
+        <properties>
+            <!-- property is optional if you want to use Infinispan, otherwise adjust to your favorite
+                NoSQL Datastore provider.
+            -->
+            <property name="hibernate.ogm.datastore.provider" value="cassandra_experimental"/>
+            <property name="hibernate.ogm.datastore.host" value="localhost:9042"/>
+            <property name="hibernate.ogm.datastore.database" value="osiam"/>
+            <property name="hibernate.ogm.datastore.username" value=""/>
+            <property name="hibernate.ogm.datastore.password" value=""/>
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -79,7 +79,6 @@ public class ClientEntity implements ClientDetails {
 
     @JsonProperty
     @Lob
-    @Type(type = "org.hibernate.type.StringClobType")
     @Column(nullable = false)
     private String redirectUri;
 

@@ -2,10 +2,10 @@ package org.osiam;
 
 import com.google.common.collect.ImmutableMap;
 import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.MigrationVersion;
+//import com.zaxxer.hikari.HikariConfig;
+//import com.zaxxer.hikari.HikariDataSource;
+//import org.flywaydb.core.Flyway;
+//import org.flywaydb.core.api.MigrationVersion;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +14,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Primary;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -70,7 +71,7 @@ public class Osiam extends SpringBootServletInitializer {
         characterEncodingFilter.setForceEncoding(true);
         return characterEncodingFilter;
     }
-
+/*
     @Primary
     @Bean
     public DataSource dataSource() {
@@ -82,7 +83,8 @@ public class Osiam extends SpringBootServletInitializer {
         hikariConfig.setPassword(databasePassword);
         return new HikariDataSource(hikariConfig);
     }
-
+*/
+/*
     @Bean(initMethod = "migrate")
     public Flyway flyway() {
         Flyway flyway = new Flyway();
@@ -92,7 +94,15 @@ public class Osiam extends SpringBootServletInitializer {
         flyway.setBaselineVersion(MigrationVersion.fromVersion("2"));
         return flyway;
     }
-
+*/
+    
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+        factoryBean.setPersistenceUnitName("osiam");
+        return factoryBean;
+    }
+    
     @Bean
     public ShaPasswordEncoder passwordEncoder() {
         ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder(512);

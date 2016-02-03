@@ -51,7 +51,6 @@ public class NameEntity {
     private long id;
 
     @Lob
-    @Type(type = "org.hibernate.type.StringClobType")
     private String formatted;
 
     private String familyName;

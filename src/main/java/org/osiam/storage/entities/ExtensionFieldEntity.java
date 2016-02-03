@@ -32,6 +32,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -98,6 +99,7 @@ public class ExtensionFieldEntity {
     private boolean required;
 
     @ManyToOne
+    @JoinColumn(name = "extension")
     private ExtensionEntity extension;
 
     public ExtensionEntity getExtension() {

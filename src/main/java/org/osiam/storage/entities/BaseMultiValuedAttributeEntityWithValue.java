@@ -32,7 +32,6 @@ import org.hibernate.annotations.Type;
 public abstract class BaseMultiValuedAttributeEntityWithValue extends BaseMultiValuedAttributeEntity {
 
     @Lob
-    @Type(type = "org.hibernate.type.StringClobType")
     private String value;
 
     public String getValue() {
