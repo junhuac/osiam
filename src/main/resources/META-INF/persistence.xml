@@ -31,6 +31,7 @@
             <!-- property is optional if you want to use Infinispan, otherwise adjust to your favorite
                 NoSQL Datastore provider.
             -->
+            <property name="hibernate.transaction.jta.platform" value="JOTM" />
             <property name="hibernate.ogm.datastore.provider" value="cassandra_experimental"/>
             <property name="hibernate.ogm.datastore.host" value="localhost:9042"/>
             <property name="hibernate.ogm.datastore.database" value="osiam"/>
