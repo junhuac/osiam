@@ -46,7 +46,7 @@ import com.google.common.collect.ImmutableSet;
 
 @Entity
 @Table(name = "scim_id")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ResourceEntity {
 
     private static final int SEQUENCE_ALLOCATION_SIZE = 1;
