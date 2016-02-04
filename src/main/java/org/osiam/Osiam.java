@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -99,19 +100,19 @@ public class Osiam extends SpringBootServletInitializer {
     
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
-         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setPersistenceUnitName("osiam");
         return factoryBean;
     }
-    
+
     @Bean
-    public JtaTransactionManager transactionManager(){
-    	JtaTransactionManager transactionBean = new JtaTransactionManager();
-    	transactionBean.setTransactionManagerName("java:comp/UserTransaction");
-    	transactionBean.setAllowCustomIsolationLevels(true);
-    	transactionBean.setTransactionSynchronizationRegistryName("java:comp/env/TransactionSynchronizationRegistry");
+    public PlatformTransactionManager platformTransactionManager()  throws Throwable {
+        JtaTransactionManager transactionBean = new JtaTransactionManager();
+        transactionBean.setTransactionManagerName("java:comp/UserTransaction");
+        transactionBean.setAllowCustomIsolationLevels(true);
+        transactionBean.setTransactionSynchronizationRegistryName("java:comp/env/TransactionSynchronizationRegistry");
         return transactionBean;
-    }
+	}
     
     @Bean
     public ShaPasswordEncoder passwordEncoder() {
