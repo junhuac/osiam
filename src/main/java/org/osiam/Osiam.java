@@ -105,6 +105,7 @@ public class Osiam extends SpringBootServletInitializer {
         return factoryBean;
     }
 
+/*    
     @Bean
     public PlatformTransactionManager platformTransactionManager()  throws Throwable {
         JtaTransactionManager transactionBean = new JtaTransactionManager();
@@ -113,6 +114,7 @@ public class Osiam extends SpringBootServletInitializer {
         transactionBean.setTransactionSynchronizationRegistryName("java:comp/env/TransactionSynchronizationRegistry");
         return transactionBean;
 	}
+*/	
     
     @Bean
     public ShaPasswordEncoder passwordEncoder() {
