@@ -38,7 +38,10 @@
         type="javax.transaction.TransactionSynchronizationRegistry"
         factory="org.objectweb.jotm.TransactionSynchronizationRegistryFactory"/>
 
-    <Transaction
+    <Resource
+        name="UserTransaction"
+        auth="Container"
+        type="javax.transaction.UserTransaction"
         factory="org.objectweb.jotm.UserTransactionFactory"
         jotm.timeout="60"/>
 
