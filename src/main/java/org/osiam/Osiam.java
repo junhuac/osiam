@@ -19,7 +19,10 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -31,6 +34,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import javax.servlet.Filter;
 import javax.sql.DataSource;
 import java.util.Map;
+import java.util.Properties;
 
 @SpringBootApplication
 @EnableWebMvc
@@ -78,21 +82,30 @@ public class Osiam extends SpringBootServletInitializer {
         characterEncodingFilter.setForceEncoding(true);
         return characterEncodingFilter;
     }
-
+/*
     @Primary
     @Bean
     public DataSource dataSource() {
         HikariConfig hikariConfig = new HikariConfig();
-        /*
         hikariConfig.setPoolName("osiam-cp");
         hikariConfig.setDriverClassName(driverClassName);
         hikariConfig.setJdbcUrl(databaseUrl);
         hikariConfig.setUsername(databaseUserName);
         hikariConfig.setPassword(databasePassword);
-        */
         return new HikariDataSource(hikariConfig);
     }
+*/
 
+    @Bean
+    public DataSource dataSource(){
+       DriverManagerDataSource dataSource = new DriverManagerDataSource();
+       dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+       dataSource.setUrl("jdbc:mysql://localhost:3306/spring_jpa");
+       dataSource.setUsername( "tutorialuser" );
+       dataSource.setPassword( "tutorialmy5ql" );
+       return dataSource;
+    }
+    
 /*
     @Bean(initMethod = "migrate")
     public Flyway flyway() {
@@ -109,6 +122,15 @@ public class Osiam extends SpringBootServletInitializer {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setPersistenceUnitName("osiam");
+        
+        //factoryBean.setDataSource(dataSource());
+        //factoryBean.setPackagesToScan(new String[] { "org.osiam.storage.entities" });
+   
+        //JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        //factoryBean.setJpaVendorAdapter(vendorAdapter);
+        factoryBean.setJpaProperties(jpaProperties());
+        factoryBean.setJpaProperties(additionalProperties());
+        
         return factoryBean;
     }
 
@@ -129,5 +151,17 @@ public class Osiam extends SpringBootServletInitializer {
         passwordEncoder.setIterations(1000);
         return passwordEncoder;
     }
-
+    
+    Properties jpaProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.transaction.factory_class", "org.hibernate.transaction.JTATransactionFactory");  
+        return properties;
+    }
+    
+    Properties additionalProperties() {
+       Properties properties = new Properties();
+       properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+       properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+       return properties;
+    }    
 }
