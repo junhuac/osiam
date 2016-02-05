@@ -25,10 +25,12 @@ package org.osiam.storage.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import org.hibernate.annotations.Type;
 
@@ -43,11 +45,14 @@ public class NameEntity {
     private static final int SEQUENCE_INITIAL_VALUE = 100;
 
     @Id
-    @SequenceGenerator(name = "sequence_scim_name",
-            sequenceName = "resource_server_sequence_scim_name",
+    @TableGenerator(name = "sequence_scim_name",
+    		table = "resource_server_sequence_scim_name",
+    		pkColumnName="GEN_KEY",
+    		valueColumnName="GEN_VALUE",
+    		pkColumnValue="SCIM_ID",
             allocationSize = SEQUENCE_ALLOCATION_SIZE,
             initialValue = SEQUENCE_INITIAL_VALUE)
-    @GeneratedValue(generator = "sequence_scim_name")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "sequence_scim_name")
     private long id;
 
     @Lob

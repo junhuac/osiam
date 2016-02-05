@@ -30,12 +30,14 @@ import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import org.osiam.resources.scim.ExtensionFieldType;
 
@@ -77,11 +79,14 @@ public class ExtensionFieldEntity {
             new ConstraintAndType(ExtensionFieldType.REFERENCE, "le")
             ));
     @Id
-    @SequenceGenerator(name = "sequence_scim_extension_field",
-            sequenceName = "resource_server_sequence_scim_extension_field",
+    @TableGenerator(name = "sequence_scim_extension_field",
+    		table = "resource_server_sequence_scim_extension_field",
+    		pkColumnName="GEN_KEY",
+    		valueColumnName="GEN_VALUE",
+    		pkColumnValue="SCIM_ID",
             allocationSize = SEQUENCE_ALLOCATION_SIZE,
             initialValue = SEQUENCE_INITIAL_VALUE)
-    @GeneratedValue(generator = "sequence_scim_extension_field")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "sequence_scim_extension_field")
     private long internalId;
     private String name;
     /**

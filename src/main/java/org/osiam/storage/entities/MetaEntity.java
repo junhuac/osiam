@@ -28,11 +28,13 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import org.hibernate.annotations.Type;
 
@@ -48,11 +50,14 @@ public class MetaEntity {
     private static final int SEQUENCE_INITIAL_VALUE = 100;
 
     @Id
-    @SequenceGenerator(name = "sequence_scim_meta",
-            sequenceName = "resource_server_sequence_scim_meta",
+    @TableGenerator(name = "sequence_scim_meta",
+    		table = "resource_server_sequence_scim_meta",
+    		pkColumnName="GEN_KEY",
+    		valueColumnName="GEN_VALUE",
+    		pkColumnValue="SCIM_ID",
             allocationSize = SEQUENCE_ALLOCATION_SIZE,
             initialValue = SEQUENCE_INITIAL_VALUE)
-    @GeneratedValue(generator = "sequence_scim_meta")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "sequence_scim_meta")
     private long id;
 
     private Date created;

@@ -40,11 +40,14 @@ import java.util.Set;
 public class ExtensionEntity {
 
     @Id
-    @SequenceGenerator(name = "sequence_scim_extension",
-            sequenceName = "resource_server_sequence_scim_extension",
+    @TableGenerator(name = "sequence_scim_extension",
+    		table = "resource_server_sequence_scim_extension",
+	    	pkColumnName="GEN_KEY",
+	    	valueColumnName="GEN_VALUE",
+	    	pkColumnValue="SCIM_ID",
             allocationSize = 1,
             initialValue = 100)
-    @GeneratedValue(generator = "sequence_scim_extension")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "sequence_scim_extension")
     private long internalId;
 
     @Lob

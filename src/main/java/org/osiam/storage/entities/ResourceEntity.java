@@ -32,6 +32,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -39,6 +40,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 import org.osiam.resources.scim.MemberRef.Type;
 
@@ -56,11 +58,14 @@ public abstract class ResourceEntity {
     private String id;
 
     @Id
-    @SequenceGenerator(name = "sequence_scim_id",
-            sequenceName = "resource_server_sequence_scim_id",
+    @TableGenerator(name = "sequence_scim_id",
+    		table = "resource_server_sequence_scim_id",
+    		pkColumnName="GEN_KEY",
+    		valueColumnName="GEN_VALUE",
+    		pkColumnValue="SCIM_ID",
             allocationSize = SEQUENCE_ALLOCATION_SIZE,
             initialValue = SEQUENCE_INITIAL_VALUE)
-    @GeneratedValue(generator = "sequence_scim_id")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "sequence_scim_id")
     private long internalId;
 
     @Column(unique = true)

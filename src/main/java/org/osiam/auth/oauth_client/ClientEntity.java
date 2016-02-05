@@ -37,11 +37,14 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -59,11 +62,14 @@ public class ClientEntity implements ClientDetails {
     private static final int SEQUENCE_ALLOCATION_SIZE = 1;
 
     @Id
-    @SequenceGenerator(name = "sequence_osiam_client",
-            sequenceName = "auth_server_sequence_osiam_client",
+    @TableGenerator(name = "sequence_osiam_client",
+    		table = "auth_server_sequence_osiam_client",
+    		pkColumnName="GEN_KEY",
+    		valueColumnName="GEN_VALUE",
+    		pkColumnValue="SCIM_ID",
             allocationSize = SEQUENCE_ALLOCATION_SIZE,
             initialValue = SEQUENCE_INITIAL_VALUE)
-    @GeneratedValue(generator = "sequence_osiam_client")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "sequence_osiam_client")
     @JsonIgnore
     private long internalId;
 
