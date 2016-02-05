@@ -39,6 +39,7 @@ public class JOTMJtaConfiguration{
  
     @Bean(initMethod = "init", destroyMethod = "close") 
     public TransactionManager transactionManager() throws Throwable { 
+        UserTransaction userTransaction = this.userTransaction(); 
         TransactionManager userTransactionManager = Current.getTransactionManager(); 
         return userTransactionManager; 
     } 

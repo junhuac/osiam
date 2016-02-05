@@ -2,6 +2,9 @@ package org.osiam;
 
 import com.google.common.collect.ImmutableMap;
 import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
 //import com.zaxxer.hikari.HikariConfig;
 //import com.zaxxer.hikari.HikariDataSource;
 //import org.flywaydb.core.Flyway;
@@ -75,19 +78,21 @@ public class Osiam extends SpringBootServletInitializer {
         characterEncodingFilter.setForceEncoding(true);
         return characterEncodingFilter;
     }
-/*
+
     @Primary
     @Bean
     public DataSource dataSource() {
         HikariConfig hikariConfig = new HikariConfig();
+        /*
         hikariConfig.setPoolName("osiam-cp");
         hikariConfig.setDriverClassName(driverClassName);
         hikariConfig.setJdbcUrl(databaseUrl);
         hikariConfig.setUsername(databaseUserName);
         hikariConfig.setPassword(databasePassword);
+        */
         return new HikariDataSource(hikariConfig);
     }
-*/
+
 /*
     @Bean(initMethod = "migrate")
     public Flyway flyway() {
