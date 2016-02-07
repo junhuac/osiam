@@ -68,6 +68,7 @@ public class ExtensionDao {
      */
     public ExtensionEntity getExtensionByUrn(String urn, boolean caseInsensitive) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
+        /*
         CriteriaQuery<ExtensionEntity> cq = cb.createQuery(ExtensionEntity.class);
         Root<ExtensionEntity> extension = cq.from(ExtensionEntity.class);
 
@@ -79,8 +80,17 @@ public class ExtensionDao {
         }
 
         cq.select(extension).where(predicate);
+        */
 
-        TypedQuery<ExtensionEntity> query = em.createQuery(cq);
+        String cq;
+        
+        if (caseInsensitive) {
+            cq = "Select ee from ExtensionEntity ee where LOWER(ee.urn) = " + urn.toLowerCase(Locale.ENGLISH);
+        } else {
+            cq = "Select ee from ExtensionEntity ee whereee.urn = " + urn;
+        }
+        
+        TypedQuery<ExtensionEntity> query = em.createQuery(cq, ExtensionEntity.class);
 
         ExtensionEntity singleExtension;
 
