@@ -111,12 +111,16 @@ public class ExtensionDao {
      * @return all extensions.
      */
     public List<ExtensionEntity> getAllExtensions() {
+    	/*
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<ExtensionEntity> cq = cb.createQuery(ExtensionEntity.class);
         Root<ExtensionEntity> extension = cq.from(ExtensionEntity.class);
 
         cq.select(extension);
-        TypedQuery<ExtensionEntity> query = em.createQuery(cq);
+        */
+    	
+    	String cq = "Select ee from ExtensionEntity ee";
+        TypedQuery<ExtensionEntity> query = em.createQuery(cq, ExtensionEntity.class);
 
         return query.getResultList();
     }
