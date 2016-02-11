@@ -42,7 +42,7 @@ public class ExtensionQueryField {
         this.numberPadder = new NumberPadder();
     }
 
-    public Predicate addFilter(Root<UserEntity> root, FilterConstraint constraint,
+    public String addFilter(Root<UserEntity> root, FilterConstraint constraint,
                                String value, CriteriaBuilder cb) {
 
         if (constraint != FilterConstraint.PRESENT && (field.getType() == ExtensionFieldType.INTEGER ||
@@ -54,11 +54,11 @@ public class ExtensionQueryField {
         final SetJoin<UserEntity, ExtensionFieldValueEntity> join = createOrGetJoin(
                 generateAlias(urn + "." + field.getName()), root, UserEntity_.extensionFieldValues);
 
-        Predicate filterPredicate = constraint.createPredicateForExtensionField(
+        String filterPredicate = constraint.createPredicateForExtensionField(
                 join.get(ExtensionFieldValueEntity_.value),
                 value, field, cb);
 
-        Predicate valueBelongsToField = cb.equal(join.get(ExtensionFieldValueEntity_.extensionField)
+        String valueBelongsToField = cb.equal(join.get(ExtensionFieldValueEntity_.extensionField)
                 .get(ExtensionFieldEntity_.internalId), field.getInternalId());
 
         join.on(valueBelongsToField);

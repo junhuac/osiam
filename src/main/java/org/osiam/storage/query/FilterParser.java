@@ -29,7 +29,6 @@ import org.osiam.storage.entities.ResourceEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public abstract class FilterParser<T extends ResourceEntity> {
@@ -37,7 +36,7 @@ public abstract class FilterParser<T extends ResourceEntity> {
     @PersistenceContext
     protected EntityManager entityManager;
 
-    public Predicate createPredicateAndJoin(ParseTree filterTree, Root<T> root) {
+    public String createPredicateAndJoin(ParseTree filterTree, Root<T> root) {
         EvalVisitor<T> visitor = new EvalVisitor<>(this, root);
 
         return visitor.visit(filterTree);

@@ -25,13 +25,12 @@ package org.osiam.storage.query;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.osiam.storage.entities.ResourceEntity;
 
 public interface QueryField<T extends ResourceEntity> {
-    Predicate addFilter(Root<T> root, FilterConstraint constraint, String value,
+    String addFilter(Root<T> root, FilterConstraint constraint, String value,
             CriteriaBuilder cb);
 
     Expression<?> createSortByField(Root<T> root, CriteriaBuilder cb);

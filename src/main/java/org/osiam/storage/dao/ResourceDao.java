@@ -59,6 +59,7 @@ public class ResourceDao {
             int startIndex,
             String sortBy, String sortOrder, FilterParser<T> filterParser) {
 
+    	/*
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
         CriteriaQuery<T> resourceQuery = cb.createQuery(clazz);
@@ -91,8 +92,17 @@ public class ResourceDao {
         }
 
         resourceQuery.orderBy(order);
+        */
 
-        TypedQuery<T> query = em.createQuery(resourceQuery);
+    	String resourceQuery = "Select t from " + clazz.toString() + " t";
+    	String internalIdQuery = "Select id from " + clazz.toString() + ".internalId id";
+
+        if (filterTree != null && filterTree.getChildCount() > 0) {
+            String predicate = filterParser.createPredicateAndJoin(filterTree, internalIdRoot);
+            internalIdQuery.where(predicate);
+        }
+    	
+        TypedQuery<T> query = em.createQuery(resourceQuery, clazz);
         query.setFirstResult(startIndex);
         query.setMaxResults(count);
 

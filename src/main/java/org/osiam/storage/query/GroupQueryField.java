@@ -31,7 +31,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.SetJoin;
 import javax.persistence.metamodel.SetAttribute;
@@ -46,7 +45,7 @@ import org.osiam.storage.entities.ResourceEntity_;
 public enum GroupQueryField implements QueryField<GroupEntity> {
     EXTERNALID("externalid") {
         @Override
-        public Predicate addFilter(Root<GroupEntity> root,
+        public String addFilter(Root<GroupEntity> root,
                 FilterConstraint constraint, String value, CriteriaBuilder cb) {
             return constraint.createPredicateForStringField(root.get(GroupEntity_.externalId), value, cb);
         }
@@ -58,7 +57,7 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
     },
     META_CREATED("meta.created") {
         @Override
-        public Predicate addFilter(Root<GroupEntity> root,
+        public String addFilter(Root<GroupEntity> root,
                 FilterConstraint constraint, String value, CriteriaBuilder cb) {
             Date date = ISODateTimeFormat.dateTimeParser().parseDateTime(value).toDate();
             return constraint.createPredicateForDateField(root.get(GroupEntity_.meta).get(MetaEntity_.created), date,
@@ -72,7 +71,7 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
     },
     META_LASTMODIFIED("meta.lastmodified") {
         @Override
-        public Predicate addFilter(Root<GroupEntity> root,
+        public String addFilter(Root<GroupEntity> root,
                 FilterConstraint constraint, String value, CriteriaBuilder cb) {
             Date date = ISODateTimeFormat.dateTimeParser().parseDateTime(value).toDate();
             return constraint.createPredicateForDateField(
@@ -86,7 +85,7 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
     },
     META_LOCATION("meta.location") {
         @Override
-        public Predicate addFilter(Root<GroupEntity> root,
+        public String addFilter(Root<GroupEntity> root,
                 FilterConstraint constraint, String value, CriteriaBuilder cb) {
             return constraint.createPredicateForStringField(root.get(GroupEntity_.meta)
                     .get(MetaEntity_.location), value, cb);
@@ -99,7 +98,7 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
     },
     DISPLAYNAME("displayname") {
         @Override
-        public Predicate addFilter(Root<GroupEntity> root, FilterConstraint constraint,
+        public String addFilter(Root<GroupEntity> root, FilterConstraint constraint,
                 String value, CriteriaBuilder cb) {
             return constraint.createPredicateForStringField(root.get(GroupEntity_.displayName), value, cb);
         }
@@ -112,7 +111,7 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
     MEMBERS("members") {
 
         @Override
-        public Predicate addFilter(Root<GroupEntity> root, FilterConstraint constraint, String value, CriteriaBuilder cb) {
+        public String addFilter(Root<GroupEntity> root, FilterConstraint constraint, String value, CriteriaBuilder cb) {
             SetJoin<GroupEntity, ResourceEntity> join = createOrGetJoin("members", root, GroupEntity_.members);
             return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);
         }
@@ -125,7 +124,7 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
     MEMBERS_VALUE("members.value") {
 
         @Override
-        public Predicate addFilter(Root<GroupEntity> root, FilterConstraint constraint, String value, CriteriaBuilder cb) {
+        public String addFilter(Root<GroupEntity> root, FilterConstraint constraint, String value, CriteriaBuilder cb) {
             SetJoin<GroupEntity, ResourceEntity> join = createOrGetJoin("members", root,
                     GroupEntity_.members);
             return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);

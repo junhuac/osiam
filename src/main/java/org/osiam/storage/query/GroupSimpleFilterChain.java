@@ -26,7 +26,6 @@ package org.osiam.storage.query;
 import org.osiam.storage.entities.GroupEntity;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public class GroupSimpleFilterChain implements FilterChain<GroupEntity> {
@@ -43,7 +42,7 @@ public class GroupSimpleFilterChain implements FilterChain<GroupEntity> {
     }
 
     @Override
-    public Predicate createPredicateAndJoin(Root<GroupEntity> root) {
+    public String createPredicateAndJoin(Root<GroupEntity> root) {
         return filterField.addFilter(root, filterExpression.getConstraint(), filterExpression.getValue(), criteriaBuilder);
     }
 }
