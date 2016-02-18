@@ -832,7 +832,7 @@ public enum UserQueryField implements QueryField<UserEntity> {
         public String addFilter(Root<UserEntity> root, FilterConstraint constraint,
                 String value, CriteriaBuilder cb) {
             final SetJoin<UserEntity, GroupEntity> join = root.join(ResourceEntity_.groups, JoinType.LEFT);
-            return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);
+            return constraint.createPredicateForStringField(ResourceEntity_.id.getName(), value, cb);
         }
 
         @Override
@@ -845,7 +845,7 @@ public enum UserQueryField implements QueryField<UserEntity> {
         public String addFilter(Root<UserEntity> root, FilterConstraint constraint,
                 String value, CriteriaBuilder cb) {
             final SetJoin<UserEntity, GroupEntity> join = root.join(ResourceEntity_.groups, JoinType.LEFT);
-            return constraint.createPredicateForStringField(GroupEntity_.displayName, value, cb);
+            return constraint.createPredicateForStringField(GroupEntity_.displayName.getName(), value, cb);
         }
 
         @Override
