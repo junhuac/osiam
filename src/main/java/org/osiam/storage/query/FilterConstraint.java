@@ -23,7 +23,6 @@
 
 package org.osiam.storage.query;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
@@ -31,6 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 
 import org.osiam.resources.exception.InvalidConstraintException;
 import org.osiam.resources.scim.MultiValuedAttributeType;
@@ -39,22 +39,22 @@ import org.osiam.storage.entities.ExtensionFieldEntity;
 public enum FilterConstraint {
     EQUALS("eq") {
         @Override
-        public String createPredicateForStringField(String path, String value, CriteriaBuilder cb) {
-            return path + " = " + value;
+        public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
+            return cb.equal(path, value);
         }
 
         @Override
-        public String createPredicateForDateField(String path, Date value, CriteriaBuilder cb) {
-            return path + " = " + value.toString();
+        public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
+            return cb.equal(path, value);
         }
 
         @Override
-        public String createPredicateForBooleanField(String path, Boolean value, CriteriaBuilder cb) {
-            return path + " = " + value.toString();
+        public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
+            return cb.equal(path, value);
         }
 
         @Override
-        public String createPredicateForExtensionField(String path, String value, ExtensionFieldEntity field,
+        public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
@@ -63,30 +63,30 @@ public enum FilterConstraint {
         }
 
         @Override
-        public <T extends MultiValuedAttributeType> String createPredicateForMultiValuedAttributeTypeField(
-        		String path, T value, CriteriaBuilder cb) {
-            return createPredicateForStringField(path, value, cb);
+        public <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
+                Path<T> path, T value, CriteriaBuilder cb) {
+            return cb.equal(path, value);
         }
 
     },
     CONTAINS("co") {
         @Override
-        public String createPredicateForStringField(String path, String value, CriteriaBuilder cb) {
-            return path + " like %" + value + "%";
+        public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
+            return cb.like(path, "%" + value + "%");
         }
 
         @Override
-        public String createPredicateForDateField(String path, Date value, CriteriaBuilder cb) {
+        public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
 
         @Override
-        public String createPredicateForBooleanField(String path, Boolean value, CriteriaBuilder cb) {
+        public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
 
         @Override
-        public String createPredicateForExtensionField(String path, String value, ExtensionFieldEntity field,
+        public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
@@ -95,30 +95,30 @@ public enum FilterConstraint {
         }
 
         @Override
-        public <T extends MultiValuedAttributeType> String createPredicateForMultiValuedAttributeTypeField(
-        		String path, T value, CriteriaBuilder cb) {
+        public <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
+                Path<T> path, T value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
 
     },
     STARTS_WITH("sw") {
         @Override
-        public String createPredicateForStringField(String path, String value, CriteriaBuilder cb) {
-            return path + " like " + value + "%";
+        public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
+            return cb.like(path, value + "%");
         }
 
         @Override
-        public String createPredicateForDateField(String path, Date value, CriteriaBuilder cb) {
+        public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
 
         @Override
-        public String createPredicateForBooleanField(String path, Boolean value, CriteriaBuilder cb) {
+        public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
 
         @Override
-        public String createPredicateForExtensionField(String path, String value, ExtensionFieldEntity field,
+        public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
@@ -127,29 +127,29 @@ public enum FilterConstraint {
         }
 
         @Override
-        public <T extends MultiValuedAttributeType> String createPredicateForMultiValuedAttributeTypeField(
-        		String path, T value, CriteriaBuilder cb) {
+        public <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
+                Path<T> path, T value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
     },
     PRESENT("pr") {
         @Override
-        public String createPredicateForStringField(String path, String value, CriteriaBuilder cb) {
-            return path + " IS NOT NULL AND " + path + "  != ''";
+        public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
+            return cb.and(cb.isNotNull(path), cb.notEqual(path, ""));
         }
 
         @Override
-        public String createPredicateForDateField(String path, Date value, CriteriaBuilder cb) {
-            return path + " IS NOT NULL";
+        public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
+            return cb.isNotNull(path);
         }
 
         @Override
-        public String createPredicateForBooleanField(String path, Boolean value, CriteriaBuilder cb) {
-            return " AND ";
+        public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
+            return cb.and();
         }
 
         @Override
-        public String createPredicateForExtensionField(String path, String value, ExtensionFieldEntity field,
+        public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
@@ -158,29 +158,29 @@ public enum FilterConstraint {
         }
 
         @Override
-        public <T extends MultiValuedAttributeType> String createPredicateForMultiValuedAttributeTypeField(
-        		String path, T value, CriteriaBuilder cb) {
-            return path + " IS NOT NULL";
+        public <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
+                Path<T> path, T value, CriteriaBuilder cb) {
+            return cb.isNotNull(path);
         }
     },
     GREATER_THAN("gt") {
         @Override
-        public String createPredicateForStringField(String path, String value, CriteriaBuilder cb) {
-            return path + " > " + value;
+        public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
+            return cb.greaterThan(path, value);
         }
 
         @Override
-        public String createPredicateForDateField(String path, Date value, CriteriaBuilder cb) {
-            return path + " > " + value.toString();
+        public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
+            return cb.greaterThan(path, value);
         }
 
         @Override
-        public String createPredicateForBooleanField(String path, Boolean value, CriteriaBuilder cb) {
+        public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
 
         @Override
-        public String createPredicateForExtensionField(String path, String value, ExtensionFieldEntity field,
+        public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
@@ -189,29 +189,29 @@ public enum FilterConstraint {
         }
 
         @Override
-        public <T extends MultiValuedAttributeType> String createPredicateForMultiValuedAttributeTypeField(
-        		String path, T value, CriteriaBuilder cb) {
+        public <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
+                Path<T> path, T value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
     },
     GREATER_EQUALS("ge") {
         @Override
-        public String createPredicateForStringField(String path, String value, CriteriaBuilder cb) {
-            return path + " >= " + value;
+        public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
+            return cb.greaterThanOrEqualTo(path, value);
         }
 
         @Override
-        public String createPredicateForDateField(String path, Date value, CriteriaBuilder cb) {
-            return path + " >= " + value.toString();
+        public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
+            return cb.greaterThanOrEqualTo(path, value);
         }
 
         @Override
-        public String createPredicateForBooleanField(String path, Boolean value, CriteriaBuilder cb) {
+        public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
 
         @Override
-        public String createPredicateForExtensionField(String path, String value, ExtensionFieldEntity field,
+        public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
@@ -220,30 +220,30 @@ public enum FilterConstraint {
         }
 
         @Override
-        public <T extends MultiValuedAttributeType> String createPredicateForMultiValuedAttributeTypeField(
-        		String path, T value, CriteriaBuilder cb) {
+        public <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
+                Path<T> path, T value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
 
     },
     LESS_THAN("lt") {
         @Override
-        public String createPredicateForStringField(String path, String value, CriteriaBuilder cb) {
-            return path + " < " + value;
+        public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
+            return cb.lessThan(path, value);
         }
 
         @Override
-        public String createPredicateForDateField(String path, Date value, CriteriaBuilder cb) {
-            return path + " < " + value.toString();
+        public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
+            return cb.lessThan(path, value);
         }
 
         @Override
-        public String createPredicateForBooleanField(String path, Boolean value, CriteriaBuilder cb) {
+        public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
 
         @Override
-        public String createPredicateForExtensionField(String path, String value, ExtensionFieldEntity field,
+        public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
@@ -252,29 +252,29 @@ public enum FilterConstraint {
         }
 
         @Override
-        public <T extends MultiValuedAttributeType> String createPredicateForMultiValuedAttributeTypeField(
-        		String path, T value, CriteriaBuilder cb) {
+        public <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
+                Path<T> path, T value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
     },
     LESS_EQUALS("le") {
         @Override
-        public String createPredicateForStringField(String path, String value, CriteriaBuilder cb) {
-            return path + " <= " + value;
+        public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
+            return cb.lessThanOrEqualTo(path, value);
         }
 
         @Override
-        public String createPredicateForDateField(String path, Date value, CriteriaBuilder cb) {
-            return path + " <= " + value.toString();
+        public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
+            return cb.lessThanOrEqualTo(path, value);
         }
 
         @Override
-        public String createPredicateForBooleanField(String path, Boolean value, CriteriaBuilder cb) {
+        public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
 
         @Override
-        public String createPredicateForExtensionField(String path, String value, ExtensionFieldEntity field,
+        public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
@@ -283,8 +283,8 @@ public enum FilterConstraint {
         }
 
         @Override
-        public <T extends MultiValuedAttributeType> String createPredicateForMultiValuedAttributeTypeField(
-        		String path, T value, CriteriaBuilder cb) {
+        public <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
+                Path<T> path, T value, CriteriaBuilder cb) {
             throw new InvalidConstraintException(toString());
         }
     };
@@ -312,16 +312,16 @@ public enum FilterConstraint {
         return name;
     }
 
-    public abstract String createPredicateForStringField(String path, String value, CriteriaBuilder cb);
+    public abstract Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb);
 
-    public abstract String createPredicateForDateField(String path, Date value, CriteriaBuilder cb);
+    public abstract Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb);
 
-    public abstract String createPredicateForBooleanField(String path, Boolean value, CriteriaBuilder cb);
+    public abstract Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb);
 
-    public abstract <T extends MultiValuedAttributeType> String createPredicateForMultiValuedAttributeTypeField(
-    		String path, T value, CriteriaBuilder cb);
+    public abstract <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
+            Path<T> path, T value, CriteriaBuilder cb);
 
-    public abstract String createPredicateForExtensionField(String path, String value,
+    public abstract Predicate createPredicateForExtensionField(Path<String> path, String value,
             ExtensionFieldEntity field, CriteriaBuilder cb);
 
 }

@@ -30,6 +30,7 @@ import org.osiam.storage.entities.ExtensionFieldEntity;
 import org.osiam.storage.entities.UserEntity;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public class UserSimpleFilterChain implements FilterChain<UserEntity> {
@@ -68,7 +69,7 @@ public class UserSimpleFilterChain implements FilterChain<UserEntity> {
     }
 
     @Override
-    public String createPredicateAndJoin(Root<UserEntity> root) {
+    public Predicate createPredicateAndJoin(Root<UserEntity> root) {
         if (userFilterField != null) {
             return userFilterField.addFilter(root, filterExpression.getConstraint(), filterExpression.getValue(),
                     criteriaBuilder);
