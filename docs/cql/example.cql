@@ -1,10 +1,29 @@
 USE osiam;
 
+INSERT INTO scim_extension ("internalId", urn) VALUES (1, 'urn:org.osiam:scim:extensions:auth-server');
+
+insert into resource_server_sequence_scim_extension ("GEN_KEY", "GEN_VALUE") values ('SCIM_ID', 1);
+
+INSERT INTO scim_extension_field ("internalId", extension, name, required, type) VALUES (1, 1, 'origin', FALSE, 'STRING');
+
+insert into resource_server_sequence_scim_extension_field ("GEN_KEY", "GEN_VALUE") values ('SCIM_ID', 1);
+
+--
+-- Example User: admin, pw: koala
+--
+INSERT INTO scim_meta (id, created, "lastModified", location, "resourceType", version) VALUES (1, '2011-10-10', '2011-10-10', NULL, 'User', NULL);
+
+insert into resource_server_sequence_scim_meta ("GEN_KEY", "GEN_VALUE") values ('SCIM_ID', 1);
+
+INSERT INTO scim_user ("internalId", active, "displayName", "externalId", id, locale, meta_id, name_id, "nickName", password, "preferredLanguage", "profileUrl", timezone, title, "userName", "userType") VALUES (1, TRUE, NULL, NULL, 'cef9452e-00a9-4cec-a086-d171374ffbef', NULL, 1, NULL, NULL, 'cbae73fac0893291c4792ef19d158a589402288b35cb18fb8406e951b9d95f6b8b06a3526ffebe96ae0d91c04ae615a7fe2af362763db386ccbf3b55c29ae800', NULL, NULL, NULL, NULL, 'admin', NULL);
+
+insert into resource_server_sequence_scim_id ("GEN_KEY", "GEN_VALUE") values ('SCIM_ID', 1);
+
 INSERT INTO osiam_client ("internalId", "accessTokenValiditySeconds", "clientSecret", id, implicit_approval, "redirectUri", "refreshTokenValiditySeconds", "validityInSeconds") VALUES (1, 28800, 'secret', 'example-client', FALSE, 'http://localhost:5000/oauth2', 86400, 28800);
 
 insert into auth_server_sequence_osiam_client ("GEN_KEY", "GEN_VALUE") values ('SCIM_ID', 1);
 
-CREATE TABLE osiam_client_scopes (id bigint primary key, scope text);
+CREATE TABLE IF NOT EXISTS osiam_client_scopes (id bigint primary key, scope text);
 
 INSERT INTO osiam_client_scopes (id, scope) VALUES (1, 'ADMIN');
 INSERT INTO osiam_client_scopes (id, scope) VALUES (2, 'ME');
