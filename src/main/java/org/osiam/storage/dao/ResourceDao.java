@@ -59,6 +59,7 @@ public class ResourceDao {
             int startIndex,
             String sortBy, String sortOrder, FilterParser<T> filterParser) {
 
+    	/*
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
         CriteriaQuery<T> resourceQuery = cb.createQuery(clazz);
@@ -101,6 +102,9 @@ public class ResourceDao {
         long totalResult = getTotalResults(clazz, internalIdQuery);
 
         return new SearchResult<>(results, totalResult);
+        */
+    	
+    	return null;
     }
 
     private <T extends ResourceEntity> long getTotalResults(Class<T> clazz, Subquery<Long> internalIdQuery) {

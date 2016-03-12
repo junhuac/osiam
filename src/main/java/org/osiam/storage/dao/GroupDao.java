@@ -119,7 +119,9 @@ public class GroupDao implements GenericDao<GroupEntity> {
     @Override
     public SearchResult<GroupEntity> search(ParseTree filterTree, String sortBy, String sortOrder, int count,
                                             int startIndex) {
-        return resourceDao.search(GroupEntity.class, filterTree, count, startIndex, sortBy, sortOrder, filterParser);
+        //return resourceDao.search(GroupEntity.class, filterTree, count, startIndex, sortBy, sortOrder, filterParser);
+    	
+    	return null;
     }
 
 }

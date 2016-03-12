@@ -157,6 +157,7 @@ public class SCIMUserProvisioning implements SCIMProvisioning<User> {
 
     @Override
     public SCIMSearchResult<User> search(String filter, String sortBy, String sortOrder, int count, int startIndex) {
+    	/*
         QueryFilterParser queryFilterParser = new QueryFilterParser();
         List<User> users = new ArrayList<>();
 
@@ -173,6 +174,11 @@ public class SCIMUserProvisioning implements SCIMProvisioning<User> {
         }
 
         return new SCIMSearchResult<>(users, result.totalResults, count, startIndex);
+        */
+ 
+        List<User> users = new ArrayList<>();
+
+        return new SCIMSearchResult<>(users, 0, count, startIndex);
     }
 
     private boolean searchedForPasswordAndNoResult(SearchResult<UserEntity> result, String filter) {

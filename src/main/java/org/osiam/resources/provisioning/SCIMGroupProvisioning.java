@@ -102,6 +102,7 @@ public class SCIMGroupProvisioning implements SCIMProvisioning<Group> {
 
     @Override
     public SCIMSearchResult<Group> search(String filter, String sortBy, String sortOrder, int count, int startIndex) {
+    	/*
         QueryFilterParser queryFilterParser = new QueryFilterParser();
         List<Group> groups = new ArrayList<>();
 
@@ -115,6 +116,11 @@ public class SCIMGroupProvisioning implements SCIMProvisioning<Group> {
         }
 
         return new SCIMSearchResult<>(groups, result.totalResults, count, startIndex);
+        */
+    	
+        List<Group> groups = new ArrayList<>();
+
+        return new SCIMSearchResult<>(groups, 0, count, startIndex);
     }
 
     @Override
