@@ -70,12 +70,13 @@ public class UserSimpleFilterChain implements FilterChain<UserEntity> {
 
     @Override
     public Predicate createPredicateAndJoin(Root<UserEntity> root) {
-        if (userFilterField != null) {
-            return userFilterField.addFilter(root, filterExpression.getConstraint(), filterExpression.getValue(),
-                    criteriaBuilder);
+        /*
+    	if (userFilterField != null) {
+            return userFilterField.addFilter(root, filterExpression.getConstraint(), filterExpression.getValue(), criteriaBuilder);
         } else {
-            return extensionFilterField.addFilter(root, filterExpression.getConstraint(), filterExpression.getValue(),
-                    criteriaBuilder);
+            return extensionFilterField.addFilter(root, filterExpression.getConstraint(), filterExpression.getValue(), criteriaBuilder);
         }
+        */
+        return null;
     }
 }

@@ -48,12 +48,14 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
         @Override
         public Predicate addFilter(Root<GroupEntity> root,
                 FilterConstraint constraint, String value, CriteriaBuilder cb) {
-            return constraint.createPredicateForStringField(root.get(GroupEntity_.externalId), value, cb);
+            //return constraint.createPredicateForStringField(root.get(GroupEntity_.externalId), value, cb);
+            return null;
         }
 
         @Override
         public Expression<?> createSortByField(Root<GroupEntity> root, CriteriaBuilder cb) {
-            return root.get(GroupEntity_.externalId);
+            //return root.get(GroupEntity_.externalId);
+            return null;
         }
     },
     META_CREATED("meta.created") {
@@ -61,13 +63,14 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
         public Predicate addFilter(Root<GroupEntity> root,
                 FilterConstraint constraint, String value, CriteriaBuilder cb) {
             Date date = ISODateTimeFormat.dateTimeParser().parseDateTime(value).toDate();
-            return constraint.createPredicateForDateField(root.get(GroupEntity_.meta).get(MetaEntity_.created), date,
-                    cb);
+            //return constraint.createPredicateForDateField(root.get(GroupEntity_.meta).get(MetaEntity_.created), date, cb);
+            return null;
         }
 
         @Override
         public Expression<?> createSortByField(Root<GroupEntity> root, CriteriaBuilder cb) {
-            return root.get(GroupEntity_.meta).get(MetaEntity_.created);
+            //return root.get(GroupEntity_.meta).get(MetaEntity_.created);
+            return null;
         }
     },
     META_LASTMODIFIED("meta.lastmodified") {
@@ -75,38 +78,42 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
         public Predicate addFilter(Root<GroupEntity> root,
                 FilterConstraint constraint, String value, CriteriaBuilder cb) {
             Date date = ISODateTimeFormat.dateTimeParser().parseDateTime(value).toDate();
-            return constraint.createPredicateForDateField(
-                    root.get(GroupEntity_.meta).get(MetaEntity_.lastModified), date, cb);
-        }
+            //return constraint.createPredicateForDateField(root.get(GroupEntity_.meta).get(MetaEntity_.lastModified), date, cb);
+            return null;
+       }
 
         @Override
         public Expression<?> createSortByField(Root<GroupEntity> root, CriteriaBuilder cb) {
-            return root.get(GroupEntity_.meta).get(MetaEntity_.lastModified);
+            //return root.get(GroupEntity_.meta).get(MetaEntity_.lastModified);
+            return null;
         }
     },
     META_LOCATION("meta.location") {
         @Override
         public Predicate addFilter(Root<GroupEntity> root,
                 FilterConstraint constraint, String value, CriteriaBuilder cb) {
-            return constraint.createPredicateForStringField(root.get(GroupEntity_.meta)
-                    .get(MetaEntity_.location), value, cb);
-        }
+            //return constraint.createPredicateForStringField(root.get(GroupEntity_.meta).get(MetaEntity_.location), value, cb);
+            return null;
+       }
 
         @Override
         public Expression<?> createSortByField(Root<GroupEntity> root, CriteriaBuilder cb) {
-            return root.get(GroupEntity_.meta).get(MetaEntity_.location);
-        }
+            //return root.get(GroupEntity_.meta).get(MetaEntity_.location);
+            return null;
+       }
     },
     DISPLAYNAME("displayname") {
         @Override
         public Predicate addFilter(Root<GroupEntity> root, FilterConstraint constraint,
                 String value, CriteriaBuilder cb) {
-            return constraint.createPredicateForStringField(root.get(GroupEntity_.displayName), value, cb);
+            //return constraint.createPredicateForStringField(root.get(GroupEntity_.displayName), value, cb);
+            return null;
         }
 
         @Override
         public Expression<?> createSortByField(Root<GroupEntity> root, CriteriaBuilder cb) {
-            return root.get(GroupEntity_.displayName);
+            //return root.get(GroupEntity_.displayName);
+            return null;
         }
     },
     MEMBERS("members") {
@@ -114,8 +121,9 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
         @Override
         public Predicate addFilter(Root<GroupEntity> root, FilterConstraint constraint, String value, CriteriaBuilder cb) {
             SetJoin<GroupEntity, ResourceEntity> join = createOrGetJoin("members", root, GroupEntity_.members);
-            return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);
-        }
+            //return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);
+            return null;
+       }
 
         @Override
         public Expression<?> createSortByField(Root<GroupEntity> root, CriteriaBuilder cb) {
@@ -128,7 +136,8 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
         public Predicate addFilter(Root<GroupEntity> root, FilterConstraint constraint, String value, CriteriaBuilder cb) {
             SetJoin<GroupEntity, ResourceEntity> join = createOrGetJoin("members", root,
                     GroupEntity_.members);
-            return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);
+            //return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);
+            return null;
         }
 
         @Override

@@ -49,7 +49,8 @@ public class EvalVisitor<T extends ResourceEntity> extends LogicalOperatorRulesB
         Predicate left = this.visit(ctx.expression(0));
         Predicate right = this.visit(ctx.expression(1));
 
-        return filterParser.entityManager.getCriteriaBuilder().and(left, right);
+        //return filterParser.entityManager.getCriteriaBuilder().and(left, right);
+        return null;
     }
 
     @Override
@@ -87,14 +88,16 @@ public class EvalVisitor<T extends ResourceEntity> extends LogicalOperatorRulesB
     public Predicate visitNotExp(@NotNull LogicalOperatorRulesParser.NotExpContext ctx) {
         Predicate term = this.visit(ctx.expression());
 
-        return filterParser.entityManager.getCriteriaBuilder().not(term);
-    }
+        //return filterParser.entityManager.getCriteriaBuilder().not(term);
+        return null;
+   }
 
     @Override
     public Predicate visitOrExp(@NotNull LogicalOperatorRulesParser.OrExpContext ctx) {
         Predicate left = this.visit(ctx.expression(0));
         Predicate right = this.visit(ctx.expression(1));
 
-        return filterParser.entityManager.getCriteriaBuilder().or(left, right);
-    }
+        //return filterParser.entityManager.getCriteriaBuilder().or(left, right);
+        return null;
+   }
 }

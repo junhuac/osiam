@@ -45,7 +45,8 @@ public class ExtensionQueryField {
     public Predicate addFilter(Root<UserEntity> root, FilterConstraint constraint,
                                String value, CriteriaBuilder cb) {
 
-        if (constraint != FilterConstraint.PRESENT && (field.getType() == ExtensionFieldType.INTEGER ||
+        /*
+    	if (constraint != FilterConstraint.PRESENT && (field.getType() == ExtensionFieldType.INTEGER ||
                 field.getType() == ExtensionFieldType.DECIMAL)) {
 
             value = numberPadder.pad(value);
@@ -64,6 +65,9 @@ public class ExtensionQueryField {
         join.on(valueBelongsToField);
 
         return filterPredicate;
+        */
+        
+        return null;
     }
 
     private String generateAlias(String value) {

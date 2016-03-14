@@ -43,7 +43,8 @@ public class GroupFilterParser extends FilterParser<GroupEntity> {
 
     @Override
     protected GroupSimpleFilterChain createFilterChain(FilterExpression<GroupEntity> filter) {
-        return new GroupSimpleFilterChain(entityManager.getCriteriaBuilder(), filter);
-    }
+        //return new GroupSimpleFilterChain(entityManager.getCriteriaBuilder(), filter);
+        return null;
+   }
 
 }

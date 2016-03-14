@@ -52,6 +52,7 @@ public class UserFilterParser extends FilterParser<UserEntity> {
 
     @Override
     protected UserSimpleFilterChain createFilterChain(FilterExpression<UserEntity> filter) {
-        return new UserSimpleFilterChain(entityManager.getCriteriaBuilder(), extensionDao, filter);
+        //return new UserSimpleFilterChain(entityManager.getCriteriaBuilder(), extensionDao, filter);
+        return null;
     }
 }

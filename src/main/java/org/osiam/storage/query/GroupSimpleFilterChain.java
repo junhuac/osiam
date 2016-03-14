@@ -44,6 +44,7 @@ public class GroupSimpleFilterChain implements FilterChain<GroupEntity> {
 
     @Override
     public Predicate createPredicateAndJoin(Root<GroupEntity> root) {
-        return filterField.addFilter(root, filterExpression.getConstraint(), filterExpression.getValue(), criteriaBuilder);
-    }
+        //return filterField.addFilter(root, filterExpression.getConstraint(), filterExpression.getValue(), criteriaBuilder);
+        return null;
+   }
 }

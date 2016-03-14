@@ -40,17 +40,20 @@ public enum FilterConstraint {
     EQUALS("eq") {
         @Override
         public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
-            return cb.equal(path, value);
+            //return cb.equal(path, value);
+            return null;
         }
 
         @Override
         public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
-            return cb.equal(path, value);
+            //return cb.equal(path, value);
+            return null;
         }
 
         @Override
         public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
-            return cb.equal(path, value);
+            //return cb.equal(path, value);
+            return null;
         }
 
         @Override
@@ -59,20 +62,23 @@ public enum FilterConstraint {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            return createPredicateForStringField(path, value, cb);
+            //return createPredicateForStringField(path, value, cb);
+            return null;
         }
 
         @Override
         public <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
                 Path<T> path, T value, CriteriaBuilder cb) {
-            return cb.equal(path, value);
-        }
+            //return cb.equal(path, value);
+            return null;
+       }
 
     },
     CONTAINS("co") {
         @Override
         public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
-            return cb.like(path, "%" + value + "%");
+            //return cb.like(path, "%" + value + "%");
+            return null;
         }
 
         @Override
@@ -91,7 +97,8 @@ public enum FilterConstraint {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            return createPredicateForStringField(path, value, cb);
+            //return createPredicateForStringField(path, value, cb);
+            return null;
         }
 
         @Override
@@ -123,7 +130,8 @@ public enum FilterConstraint {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            return createPredicateForStringField(path, value, cb);
+            //return createPredicateForStringField(path, value, cb);
+            return null;
         }
 
         @Override
@@ -135,17 +143,20 @@ public enum FilterConstraint {
     PRESENT("pr") {
         @Override
         public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
-            return cb.and(cb.isNotNull(path), cb.notEqual(path, ""));
+            //return cb.and(cb.isNotNull(path), cb.notEqual(path, ""));
+            return null;
         }
 
         @Override
         public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
-            return cb.isNotNull(path);
+            //return cb.isNotNull(path);
+            return null;
         }
 
         @Override
         public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
-            return cb.and();
+            //return cb.and();
+            return null;
         }
 
         @Override
@@ -154,24 +165,28 @@ public enum FilterConstraint {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            return createPredicateForStringField(path, value, cb);
+            //return createPredicateForStringField(path, value, cb);
+            return null;
         }
 
         @Override
         public <T extends MultiValuedAttributeType> Predicate createPredicateForMultiValuedAttributeTypeField(
                 Path<T> path, T value, CriteriaBuilder cb) {
-            return cb.isNotNull(path);
+            //return cb.isNotNull(path);
+            return null;
         }
     },
     GREATER_THAN("gt") {
         @Override
         public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
-            return cb.greaterThan(path, value);
+            //return cb.greaterThan(path, value);
+            return null;
         }
 
         @Override
         public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
-            return cb.greaterThan(path, value);
+            //return cb.greaterThan(path, value);
+            return null;
         }
 
         @Override
@@ -185,7 +200,8 @@ public enum FilterConstraint {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            return createPredicateForStringField(path, value, cb);
+            //return createPredicateForStringField(path, value, cb);
+            return null;
         }
 
         @Override
@@ -216,7 +232,8 @@ public enum FilterConstraint {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            return createPredicateForStringField(path, value, cb);
+            //return createPredicateForStringField(path, value, cb);
+            return null;
         }
 
         @Override
@@ -229,13 +246,15 @@ public enum FilterConstraint {
     LESS_THAN("lt") {
         @Override
         public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
-            return cb.lessThan(path, value);
+            //return cb.lessThan(path, value);
+            return null;
         }
 
         @Override
         public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
-            return cb.lessThan(path, value);
-        }
+            //return cb.lessThan(path, value);
+            return null;
+       }
 
         @Override
         public Predicate createPredicateForBooleanField(Path<Boolean> path, Boolean value, CriteriaBuilder cb) {
@@ -248,7 +267,8 @@ public enum FilterConstraint {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            return createPredicateForStringField(path, value, cb);
+            //return createPredicateForStringField(path, value, cb);
+            return null;
         }
 
         @Override
@@ -260,12 +280,14 @@ public enum FilterConstraint {
     LESS_EQUALS("le") {
         @Override
         public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
-            return cb.lessThanOrEqualTo(path, value);
+            //return cb.lessThanOrEqualTo(path, value);
+            return null;
         }
 
         @Override
         public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
-            return cb.lessThanOrEqualTo(path, value);
+            //return cb.lessThanOrEqualTo(path, value);
+            return null;
         }
 
         @Override
@@ -279,7 +301,8 @@ public enum FilterConstraint {
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            return createPredicateForStringField(path, value, cb);
+            //return createPredicateForStringField(path, value, cb);
+            return null;
         }
 
         @Override

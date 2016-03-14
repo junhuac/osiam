@@ -50,7 +50,8 @@ public abstract class FilterParser<T extends ResourceEntity> {
             throw new IllegalArgumentException("Sorting by " + sortBy + " is not suported.");
         }
 
-        return filterField.createSortByField(root, entityManager.getCriteriaBuilder());
+        //return filterField.createSortByField(root, entityManager.getCriteriaBuilder());
+        return null;
     }
 
     public abstract FilterExpression<T> createFilterExpression(String field, FilterConstraint constraint, String value);
