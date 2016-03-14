@@ -107,16 +107,24 @@ public class ResourceDao {
     	return null;
     }
 
-    private <T extends ResourceEntity> long getTotalResults(Class<T> clazz, Subquery<Long> internalIdQuery) {
+    private <T extends ResourceEntity> long getTotalResults(Class<T> clazz, String internalIdQuery) {
 
-        CriteriaBuilder cb = em.getCriteriaBuilder();
+        /*
+    	CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> resourceQuery = cb.createQuery(Long.class);
         Root<T> resourceRoot = resourceQuery.from(clazz);
 
         resourceQuery.select(cb.count(resourceRoot)).where(
                 cb.in(resourceRoot.get(ResourceEntity_.internalId)).value(internalIdQuery));
+        */
+    	
+        String cq;
+        
+        cq = "Select COUNT(re) from " + clazz.getName() + " re where re.internalId IN (" + internalIdQuery + ")";
+        
+        TypedQuery<Long> query = em.createQuery(cq, Long.class);
 
-        Long total = em.createQuery(resourceQuery).getSingleResult();
+        Long total = query.getSingleResult();
 
         return total;
     }
@@ -154,14 +162,22 @@ public class ResourceDao {
     public <T extends ResourceEntity, V> T getByAttribute(SingularAttribute<? super T, V> attribute, V value,
             Class<T> clazz) {
 
-        CriteriaBuilder cb = em.getCriteriaBuilder();
+        /*
+    	CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(clazz);
         Root<T> resource = cq.from(clazz);
 
         cq.select(resource).where(cb.equal(resource.get(attribute), value));
 
         TypedQuery<T> q = em.createQuery(cq);
-
+        */
+    	
+        String cq;
+        
+        cq = "Select re from " + clazz.getName() + " re where re." + attribute.getName() + " = " + value.toString();
+        
+        TypedQuery<T> q = em.createQuery(cq, clazz);
+    	
         try {
             return q.getSingleResult();
         } catch (NoResultException nre) {
@@ -175,6 +191,7 @@ public class ResourceDao {
 
     public <T extends ResourceEntity, V> boolean isUniqueAttributeAlreadyTaken(String attributeValue, String id,
             SingularAttribute<? super T, V> attribute, Class<T> clazz) {
+    	/*
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> cq = cb.createQuery(Long.class);
         Root<T> resource = cq.from(clazz);
@@ -189,7 +206,18 @@ public class ResourceDao {
         cq.where(predicate);
 
         TypedQuery<Long> countQuery = em.createQuery(cq);
+        */
 
+        String cq;
+        
+        cq = "Select COUNT(*) from " + "(Select distinct re from " + clazz.getName() + " where re." + attribute.getName() + "=" + attributeValue + " ";
+        if (id != null) {
+        	cq = cq + "AND re.id != " + id;
+        }
+        cq = cq + ")";
+        
+        TypedQuery<Long> countQuery = em.createQuery(cq, Long.class);
+    	
         return countQuery.getSingleResult() > 0;
     }
 
