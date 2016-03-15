@@ -34,6 +34,7 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.SetJoin;
+
 import javax.persistence.metamodel.SetAttribute;
 
 import org.joda.time.format.ISODateTimeFormat;
@@ -62,8 +63,10 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
         @Override
         public Predicate addFilter(Root<GroupEntity> root,
                 FilterConstraint constraint, String value, CriteriaBuilder cb) {
-            Date date = ISODateTimeFormat.dateTimeParser().parseDateTime(value).toDate();
-            //return constraint.createPredicateForDateField(root.get(GroupEntity_.meta).get(MetaEntity_.created), date, cb);
+            /*
+        	Date date = ISODateTimeFormat.dateTimeParser().parseDateTime(value).toDate();
+            return constraint.createPredicateForDateField(root.get(GroupEntity_.meta).get(MetaEntity_.created), date, cb);
+            */
             return null;
         }
 
@@ -77,8 +80,10 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
         @Override
         public Predicate addFilter(Root<GroupEntity> root,
                 FilterConstraint constraint, String value, CriteriaBuilder cb) {
-            Date date = ISODateTimeFormat.dateTimeParser().parseDateTime(value).toDate();
-            //return constraint.createPredicateForDateField(root.get(GroupEntity_.meta).get(MetaEntity_.lastModified), date, cb);
+            /*
+        	Date date = ISODateTimeFormat.dateTimeParser().parseDateTime(value).toDate();
+            return constraint.createPredicateForDateField(root.get(GroupEntity_.meta).get(MetaEntity_.lastModified), date, cb);
+            */
             return null;
        }
 
@@ -120,8 +125,10 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
 
         @Override
         public Predicate addFilter(Root<GroupEntity> root, FilterConstraint constraint, String value, CriteriaBuilder cb) {
-            SetJoin<GroupEntity, ResourceEntity> join = createOrGetJoin("members", root, GroupEntity_.members);
-            //return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);
+            /*
+        	SetJoin<GroupEntity, ResourceEntity> join = createOrGetJoin("members", root, GroupEntity_.members);
+            return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);
+            */
             return null;
        }
 
@@ -134,9 +141,11 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
 
         @Override
         public Predicate addFilter(Root<GroupEntity> root, FilterConstraint constraint, String value, CriteriaBuilder cb) {
-            SetJoin<GroupEntity, ResourceEntity> join = createOrGetJoin("members", root,
+            /*
+        	SetJoin<GroupEntity, ResourceEntity> join = createOrGetJoin("members", root,
                     GroupEntity_.members);
-            //return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);
+            return constraint.createPredicateForStringField(join.get(ResourceEntity_.id), value, cb);
+            */
             return null;
         }
 
@@ -177,7 +186,8 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
     protected <T> SetJoin<GroupEntity, T> createOrGetJoin(String alias, Root<GroupEntity> root,
             SetAttribute<GroupEntity, T> attribute) {
 
-        for (Join<GroupEntity, ?> currentJoin : root.getJoins()) {
+        /*
+    	for (Join<GroupEntity, ?> currentJoin : root.getJoins()) {
             if (currentJoin.getAlias().equals(alias)) {
                 return (SetJoin<GroupEntity, T>) currentJoin;
             }
@@ -187,6 +197,8 @@ public enum GroupQueryField implements QueryField<GroupEntity> {
         join.alias(alias);
 
         return join;
+        */
+        return null;
     }
 
 }

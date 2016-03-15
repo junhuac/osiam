@@ -42,8 +42,9 @@ public class UserFilterParser extends FilterParser<UserEntity> {
 
     @Override
     public FilterExpression<UserEntity> createFilterExpression(String field, FilterConstraint constraint, String value) {
-        return new UserFilterExpression(field, constraint, value);
-    }
+        //return new UserFilterExpression(field, constraint, value);
+        return null;
+   }
 
     @Override
     protected QueryField<UserEntity> getFilterField(String sortBy) {

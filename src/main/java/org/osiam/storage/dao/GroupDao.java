@@ -34,7 +34,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class GroupDao implements GenericDao<GroupEntity> {
 
-    private GroupFilterParser filterParser;
+    //private GroupFilterParser filterParser;
 
     private ResourceDao resourceDao;
 
@@ -43,7 +43,7 @@ public class GroupDao implements GenericDao<GroupEntity> {
 
         this.resourceDao = resourceDao;
 
-        this.filterParser = filterParser;
+        //this.filterParser = filterParser;
     }
 
     @Override
@@ -119,7 +119,8 @@ public class GroupDao implements GenericDao<GroupEntity> {
     @Override
     public SearchResult<GroupEntity> search(ParseTree filterTree, String sortBy, String sortOrder, int count,
                                             int startIndex) {
-        return resourceDao.search(GroupEntity.class, filterTree, count, startIndex, sortBy, sortOrder, filterParser);
+        //return resourceDao.search(GroupEntity.class, filterTree, count, startIndex, sortBy, sortOrder, filterParser);
+    	return null;
     }
 
 }

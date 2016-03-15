@@ -33,7 +33,7 @@ import org.osiam.resources.scim.SCIMSearchResult;
 import org.osiam.storage.dao.GroupDao;
 import org.osiam.storage.dao.SearchResult;
 import org.osiam.storage.entities.GroupEntity;
-import org.osiam.storage.query.QueryFilterParser;
+//import org.osiam.storage.query.QueryFilterParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -31,6 +31,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+/*
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
@@ -38,6 +39,8 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
+*/
+
 import javax.persistence.metamodel.SingularAttribute;
 
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -46,7 +49,7 @@ import org.osiam.resources.exception.ResourceNotFoundException;
 import org.osiam.storage.entities.GroupEntity;
 import org.osiam.storage.entities.ResourceEntity;
 import org.osiam.storage.entities.ResourceEntity_;
-import org.osiam.storage.query.FilterParser;
+//import org.osiam.storage.query.FilterParser;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -57,7 +60,7 @@ public class ResourceDao {
 
     public <T extends ResourceEntity> SearchResult<T> search(Class<T> clazz, ParseTree filterTree, int count,
             int startIndex,
-            String sortBy, String sortOrder, FilterParser<T> filterParser) {
+            String sortBy, String sortOrder/*, FilterParser<T> filterParser*/) {
 
     	/*
         CriteriaBuilder cb = em.getCriteriaBuilder();

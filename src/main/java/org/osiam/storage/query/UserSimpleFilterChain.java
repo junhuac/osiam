@@ -35,16 +35,19 @@ import javax.persistence.criteria.Root;
 
 public class UserSimpleFilterChain implements FilterChain<UserEntity> {
 
-    private final FilterExpression<UserEntity> filterExpression;
+    /*
+	private final FilterExpression<UserEntity> filterExpression;
 
     private final QueryField<UserEntity> userFilterField;
     private final ExtensionDao extensionDao;
     private final CriteriaBuilder criteriaBuilder;
     private final ExtensionQueryField extensionFilterField;
+    */
 
     public UserSimpleFilterChain(CriteriaBuilder criteriaBuilder, ExtensionDao extensionDao,
                                  FilterExpression<UserEntity> filterExpression) {
-        this.criteriaBuilder = criteriaBuilder;
+        /*
+    	this.criteriaBuilder = criteriaBuilder;
         this.extensionDao = extensionDao;
         this.filterExpression = filterExpression;
 
@@ -55,10 +58,12 @@ public class UserSimpleFilterChain implements FilterChain<UserEntity> {
             userFilterField = filterExpression.getField().getQueryField();
             extensionFilterField = null;
         }
+        */
     }
 
     private ExtensionQueryField getExtensionFilterField(FilterExpression<UserEntity> filterExpression) {
-        final ExtensionEntity extension;
+        /*
+    	final ExtensionEntity extension;
         try {
             extension = extensionDao.getExtensionByUrn(filterExpression.getField().getUrn(), true);
         } catch (OsiamException ex) {
@@ -66,6 +71,8 @@ public class UserSimpleFilterChain implements FilterChain<UserEntity> {
         }
         final ExtensionFieldEntity fieldEntity = extension.getFieldForName(filterExpression.getField().getName(), true);
         return new ExtensionQueryField(filterExpression.getField().getUrn(), fieldEntity);
+        */
+        return null;
     }
 
     @Override

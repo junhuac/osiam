@@ -59,10 +59,12 @@ public enum FilterConstraint {
         @Override
         public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
+        	/*
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            //return createPredicateForStringField(path, value, cb);
+            return createPredicateForStringField(path, value, cb);
+            */
             return null;
         }
 
@@ -94,10 +96,12 @@ public enum FilterConstraint {
         @Override
         public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
+        	/*
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            //return createPredicateForStringField(path, value, cb);
+            return createPredicateForStringField(path, value, cb);
+            */
             return null;
         }
 
@@ -111,7 +115,8 @@ public enum FilterConstraint {
     STARTS_WITH("sw") {
         @Override
         public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
-            return cb.like(path, value + "%");
+            //return cb.like(path, value + "%");
+            return null;
         }
 
         @Override
@@ -127,10 +132,12 @@ public enum FilterConstraint {
         @Override
         public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
+        	/*
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            //return createPredicateForStringField(path, value, cb);
+            return createPredicateForStringField(path, value, cb);
+            */
             return null;
         }
 
@@ -162,10 +169,12 @@ public enum FilterConstraint {
         @Override
         public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
+        	/*
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            //return createPredicateForStringField(path, value, cb);
+            return createPredicateForStringField(path, value, cb);
+            */
             return null;
         }
 
@@ -197,10 +206,12 @@ public enum FilterConstraint {
         @Override
         public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
+        	/*
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            //return createPredicateForStringField(path, value, cb);
+            return createPredicateForStringField(path, value, cb);
+            */
             return null;
         }
 
@@ -213,12 +224,14 @@ public enum FilterConstraint {
     GREATER_EQUALS("ge") {
         @Override
         public Predicate createPredicateForStringField(Path<String> path, String value, CriteriaBuilder cb) {
-            return cb.greaterThanOrEqualTo(path, value);
+            //return cb.greaterThanOrEqualTo(path, value);
+            return null;
         }
 
         @Override
         public Predicate createPredicateForDateField(Path<Date> path, Date value, CriteriaBuilder cb) {
-            return cb.greaterThanOrEqualTo(path, value);
+            //return cb.greaterThanOrEqualTo(path, value);
+            return null;
         }
 
         @Override
@@ -229,10 +242,12 @@ public enum FilterConstraint {
         @Override
         public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
+        	/*
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            //return createPredicateForStringField(path, value, cb);
+            return createPredicateForStringField(path, value, cb);
+            */
             return null;
         }
 
@@ -264,10 +279,12 @@ public enum FilterConstraint {
         @Override
         public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
+        	/*
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            //return createPredicateForStringField(path, value, cb);
+            return createPredicateForStringField(path, value, cb);
+            */
             return null;
         }
 
@@ -298,10 +315,12 @@ public enum FilterConstraint {
         @Override
         public Predicate createPredicateForExtensionField(Path<String> path, String value, ExtensionFieldEntity field,
                 CriteriaBuilder cb) {
+        	/*
             if (!field.isConstrainedValid(toString())) {
                 throw new InvalidConstraintException(toString());
             }
-            //return createPredicateForStringField(path, value, cb);
+            return createPredicateForStringField(path, value, cb);
+            */
             return null;
         }
 

@@ -34,13 +34,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDao implements GenericDao<UserEntity> {
 
-    private UserFilterParser filterParser;
+    //private UserFilterParser filterParser;
 
     private ResourceDao resourceDao;
 
     @Autowired
     public UserDao(UserFilterParser filterParser, ResourceDao resourceDao) {
-        this.filterParser = filterParser;
+        //this.filterParser = filterParser;
         this.resourceDao = resourceDao;
     }
 
@@ -125,7 +125,8 @@ public class UserDao implements GenericDao<UserEntity> {
     @Override
     public SearchResult<UserEntity> search(ParseTree filterTree, String sortBy, String sortOrder, int count,
                                            int startIndex) {
-        return resourceDao.search(UserEntity.class, filterTree, count, startIndex, sortBy, sortOrder, filterParser);
+        //return resourceDao.search(UserEntity.class, filterTree, count, startIndex, sortBy, sortOrder, filterParser);
+        return null;
     }
 
 }

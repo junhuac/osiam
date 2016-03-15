@@ -28,9 +28,11 @@ import org.osiam.storage.entities.ResourceEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
 
 public abstract class FilterParser<T extends ResourceEntity> {
 
@@ -38,19 +40,24 @@ public abstract class FilterParser<T extends ResourceEntity> {
     protected EntityManager entityManager;
 
     public Predicate createPredicateAndJoin(ParseTree filterTree, Root<T> root) {
+    	/*
         EvalVisitor<T> visitor = new EvalVisitor<>(this, root);
 
         return visitor.visit(filterTree);
+        */
+        return null;
     }
 
     public Expression<?> createSortByField(String sortBy, Root<T> root) {
+    	/*
         QueryField<T> filterField = getFilterField(sortBy);
 
         if (filterField == null) {
             throw new IllegalArgumentException("Sorting by " + sortBy + " is not suported.");
         }
 
-        //return filterField.createSortByField(root, entityManager.getCriteriaBuilder());
+        return filterField.createSortByField(root, entityManager.getCriteriaBuilder());
+        */
         return null;
     }
 

@@ -31,15 +31,19 @@ import javax.persistence.criteria.Root;
 
 public class GroupSimpleFilterChain implements FilterChain<GroupEntity> {
 
-    private final FilterExpression<GroupEntity> filterExpression;
+    /*
+	private final FilterExpression<GroupEntity> filterExpression;
 
     private final QueryField<GroupEntity> filterField;
     private final CriteriaBuilder criteriaBuilder;
+    */
 
     public GroupSimpleFilterChain(CriteriaBuilder criteriaBuilder, FilterExpression<GroupEntity> filterExpression) {
-        this.criteriaBuilder = criteriaBuilder;
+        /*
+    	this.criteriaBuilder = criteriaBuilder;
         this.filterExpression = filterExpression;
         filterField = filterExpression.getField().getQueryField();
+        */
     }
 
     @Override
