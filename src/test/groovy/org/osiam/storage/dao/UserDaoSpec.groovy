@@ -33,7 +33,7 @@ class UserDaoSpec extends Specification {
 
     ResourceDao resourceDao = Mock()
     UserFilterParser filterParser = Mock()
-    UserDao userDao = new UserDao(filterParser, resourceDao)
+    UserDao userDao = new UserDao(/*filterParser,*/ resourceDao)
 
     def 'retrieving a user by id calls resourceDao.getById()'() {
         when:

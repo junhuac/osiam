@@ -33,7 +33,7 @@ class GroupDaoSpec extends Specification {
 
     ResourceDao resourceDao = Mock()
     GroupFilterParser filterParser = Mock()
-    GroupDao groupDao = new GroupDao(resourceDao, filterParser)
+    GroupDao groupDao = new GroupDao(resourceDao/*, filterParser*/)
 
     def 'retrieving a group by id calls resourceDao.getById()'() {
         when:

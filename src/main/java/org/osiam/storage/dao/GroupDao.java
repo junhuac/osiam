@@ -27,7 +27,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.osiam.resources.exception.ResourceNotFoundException;
 import org.osiam.storage.entities.GroupEntity;
 import org.osiam.storage.entities.GroupEntity_;
-import org.osiam.storage.query.GroupFilterParser;
+//import org.osiam.storage.query.GroupFilterParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,7 +39,7 @@ public class GroupDao implements GenericDao<GroupEntity> {
     private ResourceDao resourceDao;
 
     @Autowired
-    public GroupDao(ResourceDao resourceDao, GroupFilterParser filterParser) {
+    public GroupDao(ResourceDao resourceDao/*, GroupFilterParser filterParser*/) {
 
         this.resourceDao = resourceDao;
 

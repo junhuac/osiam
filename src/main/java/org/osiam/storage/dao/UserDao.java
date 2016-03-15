@@ -27,7 +27,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.osiam.resources.exception.ResourceNotFoundException;
 import org.osiam.storage.entities.UserEntity;
 import org.osiam.storage.entities.UserEntity_;
-import org.osiam.storage.query.UserFilterParser;
+//import org.osiam.storage.query.UserFilterParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,7 +39,7 @@ public class UserDao implements GenericDao<UserEntity> {
     private ResourceDao resourceDao;
 
     @Autowired
-    public UserDao(UserFilterParser filterParser, ResourceDao resourceDao) {
+    public UserDao(/*UserFilterParser filterParser,*/ ResourceDao resourceDao) {
         //this.filterParser = filterParser;
         this.resourceDao = resourceDao;
     }
