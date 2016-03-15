@@ -26,6 +26,9 @@ package org.osiam.storage.entities;
 import com.google.common.collect.ImmutableSet;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Type;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 import org.osiam.resources.scim.MemberRef;
 
 import javax.persistence.*;
@@ -35,13 +38,14 @@ import java.util.Set;
 /**
  * User Entity
  */
-@Entity
+@Entity @Indexed
 @Table(name = "scim_user")
 public class UserEntity extends ResourceEntity {
 
     public static final String JOIN_COLUMN_NAME = "user_internal_id";
     private static final int BATCH_SIZE = 100;
 
+    @Field(analyze=Analyze.NO)
     @Column(nullable = false, unique = true)
     private String userName;
 

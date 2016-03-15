@@ -32,6 +32,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.search.annotations.Indexed;
 import org.osiam.resources.scim.MemberRef.Type;
 
 import com.google.common.collect.ImmutableSet;
@@ -39,7 +40,7 @@ import com.google.common.collect.ImmutableSet;
 /**
  * Entity class for {@link org.osiam.resources.scim.Group} resources
  */
-@Entity
+@Entity @Indexed
 @Table(name = "scim_group")
 public class GroupEntity extends ResourceEntity {
 
