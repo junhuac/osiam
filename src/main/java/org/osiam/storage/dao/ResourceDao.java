@@ -177,7 +177,9 @@ public class ResourceDao {
     	
         String cq;
         
-        cq = "Select re from " + clazz.getName() + " re where re." + attribute.getName() + " = " + value.toString();
+        cq = "Select re from " + clazz.getSimpleName() + " re where re." + attribute.getName() + " = '" + value.toString() + "'";
+        
+        System.out.println(cq);
         
         TypedQuery<T> q = em.createQuery(cq, clazz);
     	

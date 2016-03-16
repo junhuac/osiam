@@ -5,6 +5,8 @@ import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.jpa.FullTextEntityManager;
 //import com.zaxxer.hikari.HikariConfig;
 //import com.zaxxer.hikari.HikariDataSource;
 //import org.flywaydb.core.Flyway;
@@ -16,7 +18,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -31,11 +36,16 @@ import org.springframework.transaction.jta.JtaTransactionManager;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.servlet.Filter;
 import javax.sql.DataSource;
 import java.util.Map;
 import java.util.Properties;
 
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
 @SpringBootApplication
 @EnableWebMvc
 @EnableWebSecurity
@@ -66,7 +76,15 @@ public class Osiam extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(Osiam.class);
         application.setDefaultProperties(DEFAULT_PROPERTIES);
-        application.run(args);
+        ConfigurableApplicationContext context = application.run(args);
+        
+        EntityManager em = context.getBean(EntityManagerFactory.class).createEntityManager();
+        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
+        try {
+        	fullTextEntityManager.createIndexer().startAndWait();
+        }
+        catch (Exception ex) {
+        }
     }
 
     @Override
