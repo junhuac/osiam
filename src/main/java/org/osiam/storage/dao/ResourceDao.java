@@ -177,7 +177,8 @@ public class ResourceDao {
     	
         String cq;
         
-        cq = "Select re from " + clazz.getSimpleName() + " re where re." + attribute.getName() + " = '" + value.toString() + "'";
+        cq = "Select re from " + clazz.getSimpleName() + " re";
+        //cq = "Select re from " + clazz.getSimpleName() + " re where re." + attribute.getName() + " = '" + value.toString() + "'";
         
         System.out.println(cq);
         

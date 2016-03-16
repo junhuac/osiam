@@ -43,9 +43,7 @@ import javax.sql.DataSource;
 import java.util.Map;
 import java.util.Properties;
 
-@Configuration
 @EnableAutoConfiguration
-@ComponentScan
 @SpringBootApplication
 @EnableWebMvc
 @EnableWebSecurity
@@ -76,15 +74,7 @@ public class Osiam extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(Osiam.class);
         application.setDefaultProperties(DEFAULT_PROPERTIES);
-        ConfigurableApplicationContext context = application.run(args);
-        
-        EntityManager em = context.getBean(EntityManagerFactory.class).createEntityManager();
-        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
-        try {
-        	fullTextEntityManager.createIndexer().startAndWait();
-        }
-        catch (Exception ex) {
-        }
+        application.run(args);
     }
 
     @Override
