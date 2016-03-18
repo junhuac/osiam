@@ -35,7 +35,8 @@ import java.util.List;
 @Repository
 public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
 
-    ClientEntity findById(String id);
+    @Query("select c from ClientEntity c WHERE c.id = :id")
+    ClientEntity findById(@Param("id") String id);
 
     void deleteById(String id);
 

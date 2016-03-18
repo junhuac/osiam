@@ -30,7 +30,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Table;
 import javax.persistence.TypedQuery;
+import javax.persistence.Query;
+
 /*
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -177,15 +180,18 @@ public class ResourceDao {
     	
         String cq;
         
-        cq = "Select re from " + clazz.getSimpleName() + " re";
+        //cq = "Select re from " + clazz.getSimpleName() + " re";
         //cq = "Select re from " + clazz.getSimpleName() + " re where re." + attribute.getName() + " = '" + value.toString() + "'";
+
+        cq = "Select * from " + clazz.getAnnotation(Table.class).name();
         
         System.out.println(cq);
         
-        TypedQuery<T> q = em.createQuery(cq, clazz);
+        //TypedQuery<T> q = em.createQuery(cq, clazz);
+        Query q = em.createNativeQuery(cq, clazz);
     	
         try {
-            return q.getSingleResult();
+            return (T)q.getSingleResult();
         } catch (NoResultException nre) {
             throw new ResourceNotFoundException(String.format("Resource with attribute '%s' set to '%s' not found",
                     attribute.getName(), value), nre);

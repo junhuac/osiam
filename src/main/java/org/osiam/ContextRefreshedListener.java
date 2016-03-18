@@ -10,6 +10,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import org.osiam.storage.entities.UserEntity;
+
 @Component
 public class ContextRefreshedListener implements ApplicationListener<ContextRefreshedEvent>{
 

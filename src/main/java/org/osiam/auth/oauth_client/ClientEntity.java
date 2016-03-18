@@ -28,6 +28,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Sets;
 import org.hibernate.annotations.Type;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
@@ -54,6 +57,7 @@ import java.util.UUID;
 
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_EMPTY)
 @Entity
+@Indexed
 @Table(name = "osiam_client")
 public class ClientEntity implements ClientDetails {
 

@@ -38,7 +38,8 @@ import java.util.Set;
 /**
  * User Entity
  */
-@Entity @Indexed
+@Entity
+@Indexed
 @Table(name = "scim_user")
 public class UserEntity extends ResourceEntity {
 

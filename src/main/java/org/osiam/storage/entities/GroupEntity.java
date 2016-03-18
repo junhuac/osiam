@@ -40,7 +40,8 @@ import com.google.common.collect.ImmutableSet;
 /**
  * Entity class for {@link org.osiam.resources.scim.Group} resources
  */
-@Entity @Indexed
+@Entity
+@Indexed
 @Table(name = "scim_group")
 public class GroupEntity extends ResourceEntity {
 
