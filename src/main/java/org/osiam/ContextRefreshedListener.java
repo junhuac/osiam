@@ -24,6 +24,7 @@ public class ContextRefreshedListener implements ApplicationListener<ContextRefr
         	fullTextEntityManager.createIndexer().startAndWait();
         }
         catch (Exception ex) {
+        	System.out.println(ex.getMessage());
         }
     }
 }
